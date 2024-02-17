@@ -43,17 +43,10 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## Contact
 
-If you have any questions or suggestions, please open an issue on GitHub or reach out to the project maintainer.
+If you have any questions or suggestions, please open an issue.
 
 ## Acknowledgements
 
 - The `speech_recognition` library for enabling speech recognition.
 - The `pyttsx3` library for text-to-speech capabilities.
 - The `whisper` and `ollama` libraries for natural language processing and response generation.
-
-## Disclaimer
-
-Talkr is intended for personal use and is not designed for deployment in production environments. Always ensure you comply with all relevant laws and regulations regarding the use of AI and automation.
-```
-
-This README provides a brief overview of the Talkr project, including a description of its features, instructions for getting started, usage information, and details on how to contribute. It also includes a license section and a contact section for users to reach out with questions or contributions. The acknowledgements section credits the libraries used in the project, and a disclaimer is included to clarify the intended use of the software.
