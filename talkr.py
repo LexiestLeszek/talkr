@@ -5,14 +5,12 @@ import pyttsx3
 
 source = sr.Microphone()
 recognizer = sr.Recognizer()
-engine = pyttsx3.init()
-engine.setProperty('rate', 180)
+engine = pyttsx3.init() # talking engine
+engine.setProperty('rate', 180) # setting the speed of talking
 wh = whisper.load_model("tiny")
 
 def listen():
-    '''
-    Function to transcribe an audio file to text using OpenAI Speech API or locally 
-    '''
+
     with source as s:
         print("Listening for commands...")
         recognizer.adjust_for_ambient_noise(source)
@@ -31,10 +29,6 @@ def respond(text):
 
 def ask_llm(prompt):
     
-    """ 
-    Function to answer question by autocompletion 
-    """
-
     response = ollama.chat(model='qwen:0.5b', messages=[
         {
             'role': 'user',
@@ -44,7 +38,6 @@ def ask_llm(prompt):
     answer = response['message']['content']
 
     return answer
-
 
 def main():
     
