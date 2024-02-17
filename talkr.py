@@ -1,31 +1,40 @@
-import os
 import whisper
-import sys
 import ollama
 import speech_recognition as sr
-mic = sr.Microphone()
-recognizer = sr.Recognizer()
+import pyttsx3
 
-def speech2text():
+source = sr.Microphone()
+recognizer = sr.Recognizer()
+engine = pyttsx3.init()
+engine.setProperty('rate', 180)
+wh = whisper.load_model("tiny")
+
+def listen():
     '''
     Function to transcribe an audio file to text using OpenAI Speech API or locally 
     '''
-    with mic as source:
+    with source as s:
         print("Listening for commands...")
-        recognizer.adjust_for_ambient_noise(mic)
-        audio = recognizer.listen(mic)
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
     
-    with open("command.wav", "wb") as f:
-        f.write(audio.get_wav_data())
-    
-    text = whisper.load_model("base").transcribe("command.wav")["text"]
-    
-    return text
+        with open("command.wav", "wb") as f:
+            f.write(audio.get_wav_data())
+        
+        text = wh.transcribe("command.wav")["text"]
+        
+        return text
+
+def respond(text):
+    engine.say(text)
+    engine.runAndWait() 
 
 def ask_llm(prompt):
+    
     """ 
     Function to answer question by autocompletion 
     """
+
     response = ollama.chat(model='qwen:0.5b', messages=[
         {
             'role': 'user',
@@ -33,17 +42,20 @@ def ask_llm(prompt):
         },
     ])
     answer = response['message']['content']
+
     return answer
+
 
 def main():
     
     while True:
     
-        command = speech2text()
+        command = listen()
         if command is not None:
             print(f"Human: {command}")
             answer = ask_llm(command)
-            print(f"Chatbot: {answer}")
+            print(f"Bot: {answer}")
+            respond(answer)
             command = None
 
 if __name__ == '__main__':
