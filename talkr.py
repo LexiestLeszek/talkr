@@ -3,17 +3,17 @@ import whisper
 import sys
 import ollama
 import speech_recognition as sr
-source = sr.Microphone()
+mic = sr.Microphone()
 recognizer = sr.Recognizer()
 
 def speech2text():
     '''
     Function to transcribe an audio file to text using OpenAI Speech API or locally 
     '''
-    with source as s:
+    with mic as source:
         print("Listening for commands...")
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source)
+        recognizer.adjust_for_ambient_noise(mic)
+        audio = recognizer.listen(mic)
     
     with open("command.wav", "wb") as f:
         f.write(audio.get_wav_data())
