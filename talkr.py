@@ -5,8 +5,7 @@ import pyttsx3
 
 source = sr.Microphone()
 recognizer = sr.Recognizer()
-engine = pyttsx3.init() # talking engine
-engine.setProperty('rate', 180) # setting the speed of talking
+engine = pyttsx3.init().setProperty('rate', 180) # setting the speed of talking
 wh = whisper.load_model("tiny")
 
 def listen():
@@ -35,6 +34,7 @@ def ask_llm(prompt):
             'content': prompt,
         },
     ])
+    
     answer = response['message']['content']
 
     return answer
@@ -44,7 +44,8 @@ def main():
     while True:
     
         command = listen()
-        if command is not None:
+        if command is not None: # and command.startswith("Lex"):
+            #command = command.strip("Hey Lex")
             print(f"Human: {command}")
             answer = ask_llm(command)
             print(f"Bot: {answer}")
