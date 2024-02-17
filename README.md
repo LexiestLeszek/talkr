@@ -1,4 +1,3 @@
-```markdown
 # Talkr: A Conversational Assistant
 
 Talkr is a Python-based conversational assistant that listens for spoken commands, processes them, and provides a spoken response. It utilizes speech recognition and text-to-speech technologies to interact with users in a natural, conversational manner.
