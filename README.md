@@ -14,7 +14,7 @@ To get started with Talkr, you'll need to have Python installed on your system. 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/talkr.git
+   git clone https://github.com/LexiestLeszek/talkr.git
    ```
 2. Navigate to the project directory:
    ```
